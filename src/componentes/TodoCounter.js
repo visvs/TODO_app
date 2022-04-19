@@ -11,9 +11,11 @@ function TodoCounter(){
         <h2 style={estilos}>Actividades resueltas</h2>
     );
 } */
-function TodoCounter(){
+function TodoCounter({total, completed}){
     return (
-        <h2 className="TodoCounter">Actividades resueltas</h2>
+        <h2 className="TodoCounter">
+            Has completado {completed} de {total} tareas
+        </h2>
     );
 }
 export  {TodoCounter};

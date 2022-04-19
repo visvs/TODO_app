@@ -1,7 +1,9 @@
 import React from "react";
 import '../css/TodoSearch.css'
-function TodoSearch(){
-    const [searchWord, setState] = React.useState('');
+//Recibe estado compartido
+function TodoSearch({searchWord, setState}){
+    //Estado en componente Search
+    //const [searchWord, setState] = React.useState('');
 
     //Eventos
     const onSearchValueChange = (event) =>{
@@ -14,10 +16,7 @@ function TodoSearch(){
         className="TodoSearch" 
         value={searchWord}
         onChange={onSearchValueChange}
-        placeholder="Task" />,
-        <p>
-            {searchWord}
-        </p>
+        placeholder="Task" />
     ];
 }
 
