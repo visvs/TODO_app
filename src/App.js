@@ -1,19 +1,25 @@
-import react from "react";
-import { TodoCounter } from "./componentes/TodoCounter";
-import { TodoSearch } from "./componentes/TodoSearch.js";
-import { TodoList } from "./componentes/TodoList.js";
-import { TodoItem } from "./componentes/TodoItem.js";
-import { CreateTodoButton } from "./componentes/CreateTodoButton.js";
 import React from "react";
+import {AppUI} from './AppUI'
 //import './App.css';
-const defaultTodos=[
+/* const defaultTodos=[
   {text:'Cortar cebolla', completed:false},
   {text:'Tormar el curso de intro a react', completed:false},
   {text:'Llorar con la llorona', completed:true}
-];
+]; */
 
 function App() {
-  const [todos, setStateTodos] = React.useState(defaultTodos);
+  const localStorageTodos = localStorage.getItem('TODOS_v1');
+
+  let parseTODOS ;
+  if(!localStorageTodos){
+    localStorage.setItem('TODOS_v1', JSON.stringify([]))
+    parseTODOS = []
+  }
+  else{
+    parseTODOS = JSON.parse(localStorageTodos)
+  }
+
+  const [todos, setStateTodos] = React.useState(parseTODOS);
 
   const [searchWord, setState] = React.useState('');
   const completedTODOS = todos.filter(elem => elem.completed).length;
@@ -32,28 +38,56 @@ function App() {
       )
   })
   }
-  //
+
+const setTodos = (newTodos) =>{
+    const todosString = JSON.stringify(newTodos);
+    localStorage.setItem('TODOS_v1', todosString);
+    setStateTodos(newTodos);
+}
+/**
+ * Actualiza el estado de completado de x tarea a true (done)
+ * @param {*} todoText 
+ */
+  const completeTodo = (todoText)=>{
+
+    const index = todos.findIndex(todo => todo.text === todoText);
+    const newTodos = [...todos];
+    newTodos[index].completed = true;
+    //setStateTodos(newTodos);
+    setTodos(newTodos);
+
+  };
+  const unCompleteTodo = (text) => {
+    const todoIndex = todos.findIndex(todo => todo.text === text);
+    const newTodos = [...todos];
+    newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
+    //setStateTodos(newTodos);
+    setTodos(newTodos);
+  }  
+/**
+ * Elimina el TODO especificado
+ * @param {*} todoText 
+ */
+  const deleteTodo = (todoText)=>{    
+    const index = todos.findIndex(todo => todo.text === todoText);
+    const newTodos = [...todos];
+    //Sacar el todo que se desea eliminar
+    newTodos.splice(index,1);
+    //setStateTodos(newTodos);
+    setTodos(newTodos);
+  }
 
   return (
-   <react.Fragment>
-      <TodoCounter 
-      total={totalTODOS}
-      completed={completedTODOS}
-      />    
-      <TodoSearch 
-        searchWord = {searchWord}
-        setState= {setState}
-      />
-      <TodoList>
-        {searchTODOS.map(todo => (
-        <TodoItem 
-        key={todo.text} 
-        text={todo.text}
-        completed = {todo.completed}
-        />))}
-      </TodoList>
-      <CreateTodoButton />      
-   </react.Fragment>
+    <AppUI 
+    totalTODOS = {totalTODOS}
+    completedTODOS =  {completedTODOS}
+    searchWord = {searchWord}
+    setState = {setState}
+    searchTODOS = {searchTODOS}
+    completeTodo = {completeTodo}
+    deleteTodo = {deleteTodo}
+    unCompleteTodo = {unCompleteTodo}   
+    />
   );
 }
 
