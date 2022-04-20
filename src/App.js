@@ -7,20 +7,33 @@ import {AppUI} from './AppUI'
   {text:'Llorar con la llorona', completed:true}
 ]; */
 
-function App() {
-  const localStorageTodos = localStorage.getItem('TODOS_v1');
+function useLocalStorage(itemName, initialValue){
+  const localStorageItem = localStorage.getItem(itemName);
 
-  let parseTODOS ;
-  if(!localStorageTodos){
-    localStorage.setItem('TODOS_v1', JSON.stringify([]))
-    parseTODOS = []
+  let parsedTODOS;
+  if(!localStorageItem){
+    localStorage.setItem(itemName, JSON.stringify(initialValue))
+    parsedTODOS = initialValue
   }
   else{
-    parseTODOS = JSON.parse(localStorageTodos)
+    parsedTODOS = JSON.parse(localStorageItem)
   }
 
-  const [todos, setStateTodos] = React.useState(parseTODOS);
+  const [item, setStateItem] = React.useState(parsedTODOS);
 
+  const saveTODOS = (newTodos) =>{
+    const todosString = JSON.stringify(newTodos);
+    localStorage.setItem(itemName, todosString);
+    setStateItem(newTodos);
+  }
+  return [
+    item,
+    saveTODOS
+  ]
+}
+
+function App() {  
+  const [todos, saveTODOS] = useLocalStorage('TODOS_v1', [])
   const [searchWord, setState] = React.useState('');
   const completedTODOS = todos.filter(elem => elem.completed).length;
   const totalTODOS = todos.length;
@@ -38,12 +51,11 @@ function App() {
       )
   })
   }
+/**
+ * Guardar /actualizar todos en local stogare con los todos que recibe
+ * @param {*} newTodos 
+ */
 
-const setTodos = (newTodos) =>{
-    const todosString = JSON.stringify(newTodos);
-    localStorage.setItem('TODOS_v1', todosString);
-    setStateTodos(newTodos);
-}
 /**
  * Actualiza el estado de completado de x tarea a true (done)
  * @param {*} todoText 
@@ -54,7 +66,7 @@ const setTodos = (newTodos) =>{
     const newTodos = [...todos];
     newTodos[index].completed = true;
     //setStateTodos(newTodos);
-    setTodos(newTodos);
+    saveTODOS(newTodos);
 
   };
   const unCompleteTodo = (text) => {
@@ -62,7 +74,7 @@ const setTodos = (newTodos) =>{
     const newTodos = [...todos];
     newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
     //setStateTodos(newTodos);
-    setTodos(newTodos);
+    saveTODOS(newTodos);
   }  
 /**
  * Elimina el TODO especificado
@@ -74,7 +86,7 @@ const setTodos = (newTodos) =>{
     //Sacar el todo que se desea eliminar
     newTodos.splice(index,1);
     //setStateTodos(newTodos);
-    setTodos(newTodos);
+    saveTODOS(newTodos);
   }
 
   return (
