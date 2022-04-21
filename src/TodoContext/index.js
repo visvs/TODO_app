@@ -11,6 +11,7 @@ function TodoProvider(props){
         error
       }= useLocalStorage('TODOS_v1', [])
       const [searchWord, setState] = React.useState('');
+      const [openModal, setOpenModal] = React.useState(false);
       const completedTODOS = todos.filter(elem => elem.completed).length;
       const totalTODOS = todos.length;
     
@@ -64,6 +65,13 @@ function TodoProvider(props){
         //setStateTodos(newTodos);
         saveTODOS(newTodos);
       }
+      const addTodo = (text)=>{    
+        const newTodos = [...todos];
+        //Sacar el todo que se desea eliminar
+        newTodos.push({text: text, completed: false});
+        //setStateTodos(newTodos);
+        saveTODOS(newTodos);
+      }
     
 
     return(
@@ -78,7 +86,10 @@ function TodoProvider(props){
             searchTODOS, 
             completeTodo, 
             deleteTodo, 
+            addTodo,
             unCompleteTodo,   
+            setOpenModal,
+            openModal
         }}>
             {props.children}
         </TodoContext.Provider>
