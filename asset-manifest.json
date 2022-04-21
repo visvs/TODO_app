@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/visvs/TODO_app/static/css/main.ed92096b.css",
+    "main.js": "/visvs/TODO_app/static/js/main.09f832f5.js",
+    "index.html": "/visvs/TODO_app/index.html",
+    "main.ed92096b.css.map": "/visvs/TODO_app/static/css/main.ed92096b.css.map",
+    "main.09f832f5.js.map": "/visvs/TODO_app/static/js/main.09f832f5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ed92096b.css",
+    "static/js/main.09f832f5.js"
+  ]
+}
