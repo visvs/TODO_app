@@ -1,5 +1,6 @@
 import React from "react";
 import '../css/TodoCounter.css'
+import { TodoContext } from "../TodoContext";
 //Estilos en linea
 /* const estilos = {
     color: 'red',
@@ -11,10 +12,11 @@ function TodoCounter(){
         <h2 style={estilos}>Actividades resueltas</h2>
     );
 } */
-function TodoCounter({total, completed}){
+function TodoCounter(){
+    const {total: totalTODOS, completed: completedTODOS} = React.useContext(TodoContext)
     return (
         <h2 className="TodoCounter">
-            Has completado {completed} de {total} tareas
+            Has completado {completedTODOS} de {totalTODOS} tareas
         </h2>
     );
 }

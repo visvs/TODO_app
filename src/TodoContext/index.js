@@ -74,7 +74,7 @@ function TodoProvider(props){
             totalTODOS, 
             completedTODOS, 
             searchWord, 
-            setState ,
+            setState,
             searchTODOS, 
             completeTodo, 
             deleteTodo, 

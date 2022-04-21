@@ -1,13 +1,15 @@
 import React from "react";
 import '../css/TodoSearch.css'
+import { TodoContext } from "../TodoContext";
 //Recibe estado compartido
-function TodoSearch({searchWord, setState}){
+function TodoSearch(){
+    const {searchWord, setState} = React.useContext(TodoContext)
     //Estado en componente Search
     //const [searchWord, setState] = React.useState('');
 
     //Eventos
     const onSearchValueChange = (event) =>{
-        console.log(event.target.value);
+        //console.log(event.target.value);
         setState(event.target.value);
     }
 

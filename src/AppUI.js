@@ -19,6 +19,13 @@ function AppUI(/* {
     deleteTodo,
     unCompleteTodo,
 } */){
+  const {error, 
+    loading , 
+    searchTODOS, 
+    completeTodo, 
+    deleteTodo, 
+    unCompleteTodo
+  } = React.useContext(TodoContext);
     return (
         <React.Fragment>
         <TodoCounter 
@@ -29,7 +36,7 @@ function AppUI(/* {
           /* searchWord = {searchWord}
           setState= {setState} */
         />
-        <TodoContext.Consumer>
+      {/*   <TodoContext.Consumer>
           
           {({error, 
             loading , 
@@ -37,7 +44,7 @@ function AppUI(/* {
             completeTodo, 
             deleteTodo, 
             unCompleteTodo
-          })=>(
+          })=>( */}
             <TodoList>
             {error && <p>Error encontrado :C</p>}
             {loading && <p>Cargando ...</p>}
@@ -52,8 +59,8 @@ function AppUI(/* {
             onUnComplete={()=>unCompleteTodo(todo.text)}
             />))}
           </TodoList>
-          )}
-        </TodoContext.Consumer>
+         {/*  )}
+        </TodoContext.Consumer> */}
         <CreateTodoButton />      
      </React.Fragment>
     )
