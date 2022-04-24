@@ -11,7 +11,7 @@ import { TodoForm } from "./componentes/Form";
 //Componentes loading skeleton
 import {TodoError} from './TodoError';
 import {EmptyTodo} from './EmptyTodo';
-import {TodoLoading} from './TodoLoading';
+import {TodoLoading} from './TodoLoading/TodoLoading';
 
 function AppUI(/* {
     totalTODOS,
@@ -54,10 +54,11 @@ function AppUI(/* {
           })=>( */}
             <TodoList>
             {error && <TodoError />}
-            {loading && 
-            new Array(4).fill().map((item, index)=>(
+            {loading && <TodoLoading />
+            /* new Array(4).fill().map((item, index)=>(
               <TodoLoading key={index} />
-            ))} 
+            )) */
+            } 
             {(!loading && !searchTODOS.length) && <EmptyTodo/>}
 
             {searchTODOS.map(todo => (

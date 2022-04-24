@@ -1,6 +1,6 @@
 import React from "react";
 import { TodoContext } from "../TodoContext";
-
+import '../css/modal.css'
 function TodoForm(){
     const [newTodoValue, setNewValue] = React.useState(''); 
     const {addTodo, setOpenModal} = React.useContext(TodoContext)
@@ -21,25 +21,29 @@ function TodoForm(){
     }
 
     return(
-        <form onSubmit={onSubmitAdd}>
+        <div className="form-content">
+            <form onSubmit={onSubmitAdd}>
             <label>
-
+                Crea una nueva tarea
             </label>
             <textarea
                 onChange={onWrite}     
                 value={newTodoValue}       
                 placeholder="Qué hare hoy?"
             />
-            <div>
+            <div className="TodoForm-buttonContainer">
                 <button
                     type="button"
+                    className="TodoForm-button TodoForm-button--cancel"
                     onClick={onCancel}
                     >Cancelar</button>
                 <button
+                    className="TodoForm-button TodoForm-button--add"
                     type="submit"
                 >Añadir</button>
             </div>
         </form>
+        </div>
     )
 }
 export {TodoForm};
