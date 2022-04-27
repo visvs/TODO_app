@@ -2,9 +2,13 @@ import React from "react";
 
 function EmptyTodo({error}){
     return(
-        <p>
+        <div style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: 50
+        }}>
             Vamos!! Crea tu primer TODO
-        </p>
+        </div>
     )
 }
 export {EmptyTodo} 

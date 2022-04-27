@@ -11,7 +11,7 @@
     color: white;
 }
 
-.form-content{
+/* .form-content{
     width: 20rem;
     height: 15rem;
     margin: auto;
@@ -21,7 +21,7 @@
     background: linear-gradient(#212730, #171E28);
     color: hsl(216, 12%, 54%);
     border-radius: 40px;
-}
+} */
 /* .submit {
     margin-top: 3%;
     margin-left: 7%;
@@ -43,12 +43,13 @@
   form {
     width: 90%;
     max-width: 300px;
-    background-color: #fff;
+    background-color: #f7f3c3;
     padding: 33px 40px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    border-radius: 40px;
   }
   
   label {
@@ -61,7 +62,7 @@
   
   textarea {
     background-color: #F9FBFC;
-    border: 2px solid #202329;
+    border: 2px solid #F9FBFC;
     border-radius: 2px;
     box-shadow: 0px 5px 50px rgba(32, 35, 41, 0.25);
     color: #1E1E1F;
@@ -79,7 +80,7 @@
   }
   
   textarea:focus {
-    outline-color: #61DAFA;
+    outline-color: #b9effd;
   }
   
   .TodoForm-buttonContainer {
